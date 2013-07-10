@@ -13,22 +13,22 @@
 # WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 # License for the specific language governing permissions and limitations
 # under the License.
-from moniker.openstack.common import cfg
+from oslo.config import cfg
 from moniker.openstack.common import log as logging
 from moniker.notification_handler.base import Handler
 
 LOG = logging.getLogger(__name__)
 
 # Setup a config group
-#cfg.CONF.register_group(cfg.OptGroup(
-#    name='handler:sample',
-#    title="Configuration for Sample Notification Handler"
-#))
+cfg.CONF.register_group(cfg.OptGroup(
+   name='handler:sample',
+   title="Configuration for Sample Notification Handler"
+))
 
 # Setup the config options
-#cfg.CONF.register_opts([
-#    cfg.StrOpt('format', default=None)
-#], group='handler:sample')
+cfg.CONF.register_opts([
+   cfg.StrOpt('domain-id', default='12345')
+], group='handler:sample')
 
 
 class SampleHandler(Handler):
@@ -37,7 +37,7 @@ class SampleHandler(Handler):
 
     def process_notification(self, event_type, payload):
         # Do something with the notification.. e.g:
-        domain_id = '12345'
+        domain_id = cfg.CONF['handler:sample'].domain_id
         
         self.central_api.create_record(domain_id, name='my-server.domain.com.',
                                        type='A', data='127.0.0.1')
