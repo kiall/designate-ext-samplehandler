@@ -1,6 +1,6 @@
 include AUTHORS
 include ChangeLog
-include moniker_ext_samplehandler/versioninfo
+include designate_ext_samplehandler/versioninfo
 include *.txt *.ini *.cfg *.rst *.md
 
 exclude .gitignore

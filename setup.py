@@ -14,35 +14,8 @@
 # WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 # License for the specific language governing permissions and limitations
 # under the License.
-from setuptools import setup, find_packages
-from moniker_ext_samplehandler.openstack.common import setup as common_setup
+import setuptools
 
-install_requires = common_setup.parse_requirements(['tools/pip-requires'])
-tests_require = common_setup.parse_requirements(['tools/test-requires'])
-setup_require = common_setup.parse_requirements(['tools/setup-requires'])
-dependency_links = common_setup.parse_dependency_links([
-    'tools/pip-requires',
-    'tools/test-requires',
-    'tools/setup-requires'
-])
-
-setup(
-    name='moniker-ext-samplehandler',
-    version=common_setup.get_version('moniker-ext-samplehandler'),
-    description='Sample Moniker Handler Extension',
-    author='Kiall Mac Innes',
-    author_email='kiall@hp.com',
-    packages=find_packages(),
-    include_package_data=True,
-    setup_requires=setup_require,
-    install_requires=install_requires,
-    tests_require=tests_require,
-    extras_require={'test': tests_require},
-    dependency_links=dependency_links,
-    cmdclass=common_setup.get_cmdclass(),
-    entry_points=textwrap.dedent("""
-        [moniker.notification_handler]
-        sample = moniker_ext_samplehandler.notification_handler.sample\
-                 :SampleHandler
-        """),
-)
+setuptools.setup(
+    setup_requires=['d2to1', 'pbr'],
+    d2to1=True)
