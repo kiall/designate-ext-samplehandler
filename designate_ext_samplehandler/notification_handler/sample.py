@@ -14,8 +14,8 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 from oslo.config import cfg
-from moniker.openstack.common import log as logging
-from moniker.notification_handler.base import Handler
+from designate.openstack.common import log as logging
+from designate.notification_handler.base import NotificationHandler
 
 LOG = logging.getLogger(__name__)
 
@@ -34,7 +34,7 @@ cfg.CONF.register_opts([
 ], group='handler:sample')
 
 
-class SampleHandler(Handler):
+class SampleHandler(NotificationHandler):
     """ Sample Handler """
     __plugin_name__ = 'sample'
 
